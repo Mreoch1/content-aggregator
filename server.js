@@ -56,14 +56,18 @@ app.get('/api/reddit', async (req, res) => {
         limit: 10
       },
       headers: {
-        'User-Agent': 'ContentHub/1.0'
+        'User-Agent': 'ContentHub/1.0 (https://contenthub-app-2042e175ae6c.herokuapp.com/)'
       }
     });
     console.log('Reddit response:', response.data);
     res.json(response.data.data.children);
   } catch (error) {
-    logError('Reddit', error.response ? error.response.data : error.message);
-    res.status(500).json({ error: 'Error fetching Reddit data', details: error.message });
+    logError('Reddit', error.response ? JSON.stringify(error.response.data) : error.message);
+    if (error.response && error.response.status === 403) {
+      res.status(500).json({ error: 'Error fetching Reddit data', details: 'Access forbidden. This might be due to rate limiting.' });
+    } else {
+      res.status(500).json({ error: 'Error fetching Reddit data', details: error.message });
+    }
   }
 });
 
