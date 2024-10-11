@@ -24,7 +24,7 @@ ContentHub is a web-based content aggregator that pulls videos from YouTube and 
 
 1. Clone the repository:
    ```
-   git clone https://github.com/Mreoc/content-aggregator.git
+   git clone https://github.com/Mreoch1/content-aggregator.git
    cd content-aggregator
    ```
 
@@ -43,7 +43,12 @@ ContentHub is a web-based content aggregator that pulls videos from YouTube and 
    npm start
    ```
 
-5. Open a web browser and navigate to `http://localhost:3000`
+5. For development with auto-restart on file changes:
+   ```
+   npm run dev
+   ```
+
+6. Open a web browser and navigate to `http://localhost:3000`
 
 ## Usage
 
@@ -55,10 +60,17 @@ ContentHub is a web-based content aggregator that pulls videos from YouTube and 
 6. Click on video or thread links to view the original content
 7. Save items to favorites for quick access later
 
+## Project Structure
+
+- `server.js`: Main server file with API endpoints
+- `public/index.html`: Main HTML file
+- `public/styles.css`: CSS styles (including Tailwind CSS)
+- `public/app.js`: Frontend JavaScript
+
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+Please read the `best_practices.txt` file for our coding standards and best practices.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is open source and available under the MIT License.
