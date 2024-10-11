@@ -1,7 +1,59 @@
+let currentUser = null;
+
 document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('searchButton');
+    const loginButton = document.getElementById('loginButton');
+
     searchButton.addEventListener('click', performSearch);
+    loginButton.addEventListener('click', login);
+
+    // Check if user is already logged in
+    const savedUsername = localStorage.getItem('username');
+    if (savedUsername) {
+        login(savedUsername);
+    }
 });
+
+function login() {
+    const usernameInput = document.getElementById('usernameInput');
+    const username = usernameInput.value.trim();
+    if (username) {
+        currentUser = username;
+        localStorage.setItem('username', username);
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('favoritesContainer').style.display = 'block';
+        loadFavorites();
+    }
+}
+
+function loadFavorites() {
+    const favorites = JSON.parse(localStorage.getItem(`favorites_${currentUser}`)) || [];
+    const favoritesList = document.getElementById('favoritesList');
+    favoritesList.innerHTML = favorites.map(item => `
+        <li>
+            <a href="${item.url}" target="_blank">${item.title}</a>
+            <button onclick="removeFavorite('${item.id}')">Remove</button>
+        </li>
+    `).join('');
+}
+
+function addFavorite(id, title, url) {
+    if (!currentUser) return;
+    const favorites = JSON.parse(localStorage.getItem(`favorites_${currentUser}`)) || [];
+    if (!favorites.some(item => item.id === id)) {
+        favorites.push({ id, title, url });
+        localStorage.setItem(`favorites_${currentUser}`, JSON.stringify(favorites));
+        loadFavorites();
+    }
+}
+
+function removeFavorite(id) {
+    if (!currentUser) return;
+    let favorites = JSON.parse(localStorage.getItem(`favorites_${currentUser}`)) || [];
+    favorites = favorites.filter(item => item.id !== id);
+    localStorage.setItem(`favorites_${currentUser}`, JSON.stringify(favorites));
+    loadFavorites();
+}
 
 async function fetchYouTubeVideos(query, sort) {
     const response = await fetch(`/api/youtube?q=${encodeURIComponent(query)}&sort=${sort}`);
@@ -47,6 +99,7 @@ function displayResults(youtubeResults, redditResults) {
             <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">
                 ${video.snippet.title}
             </a>
+            <button onclick="addFavorite('yt_${video.id.videoId}', '${video.snippet.title}', 'https://www.youtube.com/watch?v=${video.id.videoId}')">Add to Favorites</button>
         </li>
     `).join('');
 
@@ -55,6 +108,7 @@ function displayResults(youtubeResults, redditResults) {
             <a href="https://www.reddit.com${thread.data.permalink}" target="_blank">
                 ${thread.data.title}
             </a>
+            <button onclick="addFavorite('rd_${thread.data.id}', '${thread.data.title}', 'https://www.reddit.com${thread.data.permalink}')">Add to Favorites</button>
         </li>
     `).join('');
 }

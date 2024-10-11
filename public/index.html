@@ -10,6 +10,10 @@
 <body>
     <div class="container">
         <h1>ContentHub</h1>
+        <div id="loginContainer">
+            <input type="text" id="usernameInput" placeholder="Username">
+            <button id="loginButton">Login</button>
+        </div>
         <div id="searchContainer">
             <input type="text" id="searchInput" placeholder="Search...">
             <select id="sortSelect">
@@ -27,6 +31,10 @@
                 <h2>Reddit Threads</h2>
                 <ul id="redditList"></ul>
             </div>
+        </div>
+        <div id="favoritesContainer" style="display: none;">
+            <h2>Favorites</h2>
+            <ul id="favoritesList"></ul>
         </div>
     </div>
     <script src="app.js"></script>
