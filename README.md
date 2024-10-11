@@ -74,3 +74,7 @@ Please read the `best_practices.txt` file for our coding standards and best prac
 ## License
 
 This project is open source and available under the MIT License.
+
+## Live Demo
+
+You can view a live demo of the app here: https://contenthub-app.herokuapp.com
