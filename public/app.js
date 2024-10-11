@@ -66,8 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchYouTubeVideos(query, sort) {
         const response = await fetch(`/api/youtube?q=${encodeURIComponent(query)}&sort=${sort}`);
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Failed to fetch YouTube videos');
+            const errorText = await response.text();
+            console.error('YouTube API Error:', errorText);
+            throw new Error(`Failed to fetch YouTube videos: ${response.statusText}`);
         }
         return await response.json();
     }
@@ -75,8 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchRedditThreads(query, sort) {
         const response = await fetch(`/api/reddit?q=${encodeURIComponent(query)}&sort=${sort}`);
         if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Failed to fetch Reddit threads');
+            const errorText = await response.text();
+            console.error('Reddit API Error:', errorText);
+            throw new Error(`Failed to fetch Reddit threads: ${response.statusText}`);
         }
         return await response.json();
     }

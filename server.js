@@ -16,6 +16,7 @@ app.use(express.json());
 app.get('/api/youtube', async (req, res) => {
   try {
     const { q, sort } = req.query;
+    console.log('YouTube API request:', { q, sort });
     const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
       params: {
         part: 'snippet',
@@ -26,6 +27,7 @@ app.get('/api/youtube', async (req, res) => {
         maxResults: 10
       }
     });
+    console.log('YouTube API response:', response.data);
     res.json(response.data.items);
   } catch (error) {
     console.error('YouTube API Error:', error.response ? error.response.data : error.message);
@@ -36,6 +38,7 @@ app.get('/api/youtube', async (req, res) => {
 app.get('/api/reddit', async (req, res) => {
   try {
     const { q, sort } = req.query;
+    console.log('Reddit API request:', { q, sort });
     const response = await axios.get(`https://www.reddit.com/search.json`, {
       params: {
         q,
@@ -46,6 +49,7 @@ app.get('/api/reddit', async (req, res) => {
         'User-Agent': 'ContentHub/1.0'
       }
     });
+    console.log('Reddit API response:', response.data);
     res.json(response.data.data.children);
   } catch (error) {
     console.error('Reddit API Error:', error.response ? error.response.data : error.message);
