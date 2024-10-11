@@ -12,25 +12,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.static('public'));
 app.use(express.json());
 
-// Add these variables at the top of your file
-const REDDIT_CLIENT_ID = process.env.REDDIT_CLIENT_ID;
-const REDDIT_CLIENT_SECRET = process.env.REDDIT_CLIENT_SECRET;
-
-// Function to get Reddit access token
-async function getRedditAccessToken() {
-  const auth = Buffer.from(`${REDDIT_CLIENT_ID}:${REDDIT_CLIENT_SECRET}`).toString('base64');
-  const response = await axios.post('https://www.reddit.com/api/v1/access_token', 
-    'grant_type=client_credentials',
-    {
-      headers: {
-        'Authorization': `Basic ${auth}`,
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    }
-  );
-  return response.data.access_token;
-}
-
 app.get('/api/youtube', async (req, res) => {
   try {
     const { q, sort } = req.query;
@@ -56,10 +37,7 @@ app.get('/api/youtube', async (req, res) => {
 app.get('/api/reddit', async (req, res) => {
   try {
     const { q, sort } = req.query;
-    console.log('Reddit API request:', { q, sort });
-    
-    const accessToken = await getRedditAccessToken();
-    
+    console.log('Reddit request:', { q, sort });
     const response = await axios.get(`https://www.reddit.com/search.json`, {
       params: {
         q,
@@ -67,15 +45,13 @@ app.get('/api/reddit', async (req, res) => {
         limit: 10
       },
       headers: {
-        'Authorization': `Bearer ${accessToken}`,
         'User-Agent': 'ContentHub/1.0'
       }
     });
-    
-    console.log('Reddit API response:', response.data);
+    console.log('Reddit response:', response.data);
     res.json(response.data.data.children);
   } catch (error) {
-    console.error('Reddit API Error:', error.response ? error.response.data : error.message);
+    console.error('Reddit Error:', error.response ? error.response.data : error.message);
     res.status(500).json({ error: 'Error fetching Reddit data', details: error.message });
   }
 });
