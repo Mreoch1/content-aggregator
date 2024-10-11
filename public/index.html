@@ -9,33 +9,37 @@
 </head>
 <body>
     <div class="container">
-        <h1>ContentHub</h1>
-        <div id="loginContainer">
-            <input type="text" id="usernameInput" placeholder="Username">
-            <button id="loginButton">Login</button>
-        </div>
-        <div id="searchContainer">
-            <input type="text" id="searchInput" placeholder="Search...">
-            <select id="sortSelect">
-                <option value="relevance">Relevance</option>
-                <option value="date">Date</option>
-            </select>
-            <button id="searchButton">Search</button>
-        </div>
-        <div id="resultsContainer">
-            <div id="youtubeResults">
-                <h2>YouTube Videos</h2>
-                <ul id="youtubeList"></ul>
+        <header>
+            <h1>ContentHub</h1>
+            <div id="loginContainer">
+                <input type="text" id="usernameInput" placeholder="Username">
+                <button id="loginButton" class="btn btn-primary">Login</button>
             </div>
-            <div id="redditResults">
-                <h2>Reddit Threads</h2>
-                <ul id="redditList"></ul>
+        </header>
+        <main>
+            <div id="searchContainer">
+                <input type="text" id="searchInput" placeholder="Search...">
+                <select id="sortSelect">
+                    <option value="relevance">Relevance</option>
+                    <option value="date">Date</option>
+                </select>
+                <button id="searchButton" class="btn btn-primary">Search</button>
             </div>
-        </div>
-        <div id="favoritesContainer" style="display: none;">
-            <h2>Favorites</h2>
-            <ul id="favoritesList"></ul>
-        </div>
+            <div id="resultsContainer">
+                <section id="youtubeResults">
+                    <h2>YouTube Videos</h2>
+                    <ul id="youtubeList" class="results-list"></ul>
+                </section>
+                <section id="redditResults">
+                    <h2>Reddit Threads</h2>
+                    <ul id="redditList" class="results-list"></ul>
+                </section>
+            </div>
+            <section id="favoritesContainer" style="display: none;">
+                <h2>Favorites</h2>
+                <ul id="favoritesList" class="results-list"></ul>
+            </section>
+        </main>
     </div>
     <script src="app.js"></script>
 </body>

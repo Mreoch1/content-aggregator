@@ -20,10 +20,22 @@ function login() {
     if (username) {
         currentUser = username;
         localStorage.setItem('username', username);
-        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('loginContainer').innerHTML = `Welcome, ${username}! <button id="logoutButton" class="btn">Logout</button>`;
         document.getElementById('favoritesContainer').style.display = 'block';
+        document.getElementById('logoutButton').addEventListener('click', logout);
         loadFavorites();
     }
+}
+
+function logout() {
+    currentUser = null;
+    localStorage.removeItem('username');
+    document.getElementById('loginContainer').innerHTML = `
+        <input type="text" id="usernameInput" placeholder="Username">
+        <button id="loginButton" class="btn btn-primary">Login</button>
+    `;
+    document.getElementById('favoritesContainer').style.display = 'none';
+    document.getElementById('loginButton').addEventListener('click', login);
 }
 
 function loadFavorites() {
@@ -32,13 +44,16 @@ function loadFavorites() {
     favoritesList.innerHTML = favorites.map(item => `
         <li>
             <a href="${item.url}" target="_blank">${item.title}</a>
-            <button onclick="removeFavorite('${item.id}')">Remove</button>
+            <button onclick="removeFavorite('${item.id}')" class="add-favorite-btn">Remove</button>
         </li>
     `).join('');
 }
 
 function addFavorite(id, title, url) {
-    if (!currentUser) return;
+    if (!currentUser) {
+        alert('Please log in to add favorites.');
+        return;
+    }
     const favorites = JSON.parse(localStorage.getItem(`favorites_${currentUser}`)) || [];
     if (!favorites.some(item => item.id === id)) {
         favorites.push({ id, title, url });
@@ -96,19 +111,15 @@ function displayResults(youtubeResults, redditResults) {
 
     youtubeList.innerHTML = youtubeResults.map(video => `
         <li>
-            <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">
-                ${video.snippet.title}
-            </a>
-            <button onclick="addFavorite('yt_${video.id.videoId}', '${video.snippet.title}', 'https://www.youtube.com/watch?v=${video.id.videoId}')">Add to Favorites</button>
+            <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">${video.snippet.title}</a>
+            <button onclick="addFavorite('yt_${video.id.videoId}', '${video.snippet.title}', 'https://www.youtube.com/watch?v=${video.id.videoId}')" class="add-favorite-btn">Add to Favorites</button>
         </li>
     `).join('');
 
     redditList.innerHTML = redditResults.map(thread => `
         <li>
-            <a href="https://www.reddit.com${thread.data.permalink}" target="_blank">
-                ${thread.data.title}
-            </a>
-            <button onclick="addFavorite('rd_${thread.data.id}', '${thread.data.title}', 'https://www.reddit.com${thread.data.permalink}')">Add to Favorites</button>
+            <a href="https://www.reddit.com${thread.data.permalink}" target="_blank">${thread.data.title}</a>
+            <button onclick="addFavorite('rd_${thread.data.id}', '${thread.data.title}', 'https://www.reddit.com${thread.data.permalink}')" class="add-favorite-btn">Add to Favorites</button>
         </li>
     `).join('');
 }
