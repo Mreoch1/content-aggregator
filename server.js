@@ -128,7 +128,7 @@ let isWindowOpen = false;
 
 function startServer() {
   const server = app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
     if (!isWindowOpen) {
       open(`http://localhost:${PORT}`, {app: {name: open.apps.chrome}}).then(() => {
         isWindowOpen = true;
