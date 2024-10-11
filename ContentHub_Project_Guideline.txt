@@ -1,0 +1,56 @@
+ContentHub Project Guideline
+
+Overview:
+ContentHub is a web-based content aggregator that pulls videos from YouTube and threads from Reddit based on user search queries. The platform features a sleek, user-centric interface with a minimalist design. It includes user authentication, favorites functionality, and persistent storage of user preferences.
+
+Key Features:
+- Search Functionality: Search for videos from YouTube and threads from Reddit using a single search bar.
+- Content Display: Display videos and threads side by side with detailed information including publication dates.
+- Sorting Options: Ability to sort results by relevance or date.
+- User Profiles: Simple login system with profile display and persistent sessions.
+- Favorites: Users can save and manage favorite videos and threads.
+- Responsive Design: Ensures ContentHub works smoothly on desktop and mobile devices.
+
+Technical Stack:
+- Backend: Node.js with Express
+- Frontend: HTML, CSS (Tailwind CSS), and Vanilla JavaScript
+- APIs: 
+  - YouTube Data API v3 (for video search).
+  - Reddit JSON endpoint (for thread search, no authentication required).
+- Local Storage: For maintaining user session and storing favorites
+
+Project Structure:
+/content-aggregator
+├── public/
+│   ├── index.html
+│   ├── styles.css
+│   └── app.js
+├── server.js
+├── .env
+├── package.json
+└── README.md
+
+Key Components:
+- server.js: Express server, API endpoints for YouTube and Reddit
+- public/index.html: Main HTML structure
+- public/styles.css: Tailwind CSS and custom styles
+- public/app.js: Frontend JavaScript for handling user interactions, API calls, and displaying results
+
+API Endpoints:
+- /api/youtube: Fetches YouTube videos using the YouTube Data API v3
+- /api/reddit: Fetches Reddit threads using the Reddit JSON endpoint
+
+User Authentication:
+Simple username-based authentication with session persistence using localStorage.
+
+Favorites Functionality:
+Users can save and remove favorites, which are stored in localStorage and persist across sessions.
+
+Future Improvements:
+- Implement server-side user authentication and database storage for favorites
+- Add more content sources
+- Implement infinite scrolling or pagination for large result sets
+- Enhance error handling and user feedback
+- Implement server-side rendering for improved SEO
+
+This guideline provides a structured approach to building ContentHub, ensuring a smooth and user-friendly experience while keeping costs at zero through the use of free-tier tools and services.
