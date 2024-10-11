@@ -77,4 +77,4 @@ This project is open source and available under the MIT License.
 
 ## Live Demo
 
-You can view a live demo of the app here: https://contenthub-app.herokuapp.com
+You can view a live demo of the app here: https://contenthub-app-2042e175ae6c.herokuapp.com/
