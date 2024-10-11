@@ -63,11 +63,7 @@ app.get('/api/reddit', async (req, res) => {
     res.json(response.data.data.children);
   } catch (error) {
     logError('Reddit', error.response ? JSON.stringify(error.response.data) : error.message);
-    if (error.response && error.response.status === 403) {
-      res.status(500).json({ error: 'Error fetching Reddit data', details: 'Access forbidden. This might be due to rate limiting.' });
-    } else {
-      res.status(500).json({ error: 'Error fetching Reddit data', details: error.message });
-    }
+    res.status(500).json({ error: 'Error fetching Reddit data', details: 'Unable to fetch data from Reddit' });
   }
 });
 

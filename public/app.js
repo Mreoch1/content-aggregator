@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const response = await fetch(`/api/reddit?q=${encodeURIComponent(query)}&sort=${sort}`);
         if (!response.ok) {
             const errorText = await response.text();
-            console.error('Reddit API Error:', errorText);
+            console.error('Reddit Error:', errorText);
             throw new Error(`Failed to fetch Reddit threads: ${response.statusText}`);
         }
         return await response.json();
