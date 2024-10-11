@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Content Aggregator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Content Aggregator</h1>
+        <div class="search-form">
+            <form method="POST">
+                <label for="youtube_query">YouTube Search:</label>
+                <input type="text" id="youtube_query" name="youtube_query" required>
+                <input type="submit" value="Search YouTube">
+                <br><br>
+                <label for="subreddit_name">Subreddit Name:</label>
+                <input type="text" id="subreddit_name" name="subreddit_name" required>
+                <input type="submit" value="Fetch Reddit Threads">
+            </form>
+        </div>
+
+        <div class="content-section">
+            <h2>YouTube Videos</h2>
+            {% for video in youtube_videos %}
+                <div class="content-item">
+                    <h3>{{ video.title }}</h3>
+                    <p>Channel: {{ video.channel }}</p>
+                    <a href="{{ video.url }}" target="_blank">Watch Video</a>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="content-section">
+            <h2>Reddit Threads</h2>
+            {% for thread in reddit_threads %}
+                <div class="content-item">
+                    <h3>{{ thread.title }}</h3>
+                    <p>Score: {{ thread.score }} | Comments: {{ thread.num_comments }}</p>
+                    <p>Author: {{ thread.author }}</p>
+                    <a href="{{ thread.url }}" target="_blank">View Thread</a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
