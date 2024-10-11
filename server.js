@@ -41,6 +41,9 @@ app.get('/api/reddit', async (req, res) => {
         q,
         sort: sort === 'date' ? 'new' : 'relevance',
         limit: 10
+      },
+      headers: {
+        'User-Agent': 'ContentHub/1.0'
       }
     });
     res.json(response.data.data.children);
@@ -57,4 +60,5 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
+  console.log('Environment variables:', process.env);
 });
