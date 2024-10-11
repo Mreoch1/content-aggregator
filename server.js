@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const axios = require('axios');
+const fs = require('fs');
 
 // Load environment variables
 dotenv.config();
@@ -11,6 +12,16 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 app.use(express.json());
+
+// Function to log errors
+function logError(source, error) {
+  const timestamp = new Date().toISOString();
+  const errorMessage = `[${timestamp}] ${source} Error: ${error}\n`;
+  fs.appendFile('error_log.txt', errorMessage, (err) => {
+    if (err) console.error('Error writing to log file:', err);
+  });
+  console.error(errorMessage);
+}
 
 app.get('/api/youtube', async (req, res) => {
   try {
@@ -29,7 +40,7 @@ app.get('/api/youtube', async (req, res) => {
     console.log('YouTube API response:', response.data);
     res.json(response.data.items);
   } catch (error) {
-    console.error('YouTube API Error:', error.response ? error.response.data : error.message);
+    logError('YouTube API', error.response ? error.response.data : error.message);
     res.status(500).json({ error: 'Error fetching YouTube data', details: error.message });
   }
 });
@@ -51,7 +62,7 @@ app.get('/api/reddit', async (req, res) => {
     console.log('Reddit response:', response.data);
     res.json(response.data.data.children);
   } catch (error) {
-    console.error('Reddit Error:', error.response ? error.response.data : error.message);
+    logError('Reddit', error.response ? error.response.data : error.message);
     res.status(500).json({ error: 'Error fetching Reddit data', details: error.message });
   }
 });
