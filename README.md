@@ -7,7 +7,7 @@ ContentHub is a web-based content aggregator that pulls videos from YouTube and 
 - Search for YouTube videos and Reddit threads simultaneously
 - Display results side by side with publication dates
 - Sort results by relevance or date
-- User authentication with persistent sessions
+- Simple user authentication with persistent sessions
 - Save favorite videos and threads
 - Responsive design for both desktop and mobile use
 
@@ -24,8 +24,8 @@ ContentHub is a web-based content aggregator that pulls videos from YouTube and 
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/contenthub.git
-   cd contenthub
+   git clone https://github.com/Mreoc/content-aggregator.git
+   cd content-aggregator
    ```
 
 2. Install dependencies:
@@ -47,7 +47,7 @@ ContentHub is a web-based content aggregator that pulls videos from YouTube and 
 
 ## Usage
 
-1. Enter a username to log in (simple authentication)
+1. Enter a username to log in
 2. Enter a search query in the input field
 3. Select sorting preference (relevance or date)
 4. Click the "Search" button or press Enter
@@ -55,17 +55,10 @@ ContentHub is a web-based content aggregator that pulls videos from YouTube and 
 6. Click on video or thread links to view the original content
 7. Save items to favorites for quick access later
 
-## Project Structure
-
-- `server.js`: Main server file with API endpoints
-- `public/index.html`: Main HTML file
-- `public/styles.css`: CSS styles (including Tailwind CSS)
-- `public/app.js`: Frontend JavaScript
-
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
 ## License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.

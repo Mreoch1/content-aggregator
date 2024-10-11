@@ -1,13 +1,13 @@
 ContentHub Project Guideline
 
 Overview:
-ContentHub is a web-based content aggregator that pulls videos from YouTube and threads from Reddit based on user search queries. The platform features a sleek, user-centric interface with a minimalist design. It includes user authentication, favorites functionality, and persistent storage of user preferences.
+ContentHub is a web-based content aggregator that pulls videos from YouTube and threads from Reddit based on user search queries. The platform features a sleek, user-centric interface with a minimalist design. It includes simple user authentication, favorites functionality, and persistent storage of user preferences using local storage.
 
 Key Features:
 - Search Functionality: Search for videos from YouTube and threads from Reddit using a single search bar.
 - Content Display: Display videos and threads side by side with detailed information including publication dates.
 - Sorting Options: Ability to sort results by relevance or date.
-- User Profiles: Simple login system with profile display and persistent sessions.
+- User Profiles: Simple login system with profile display and persistent sessions using local storage.
 - Favorites: Users can save and manage favorite videos and threads.
 - Responsive Design: Ensures ContentHub works smoothly on desktop and mobile devices.
 
