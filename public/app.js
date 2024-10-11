@@ -43,20 +43,32 @@ function loadFavorites() {
     const favoritesList = document.getElementById('favoritesList');
     favoritesList.innerHTML = favorites.map(item => `
         <li>
-            <a href="${item.url}" target="_blank">${item.title}</a>
-            <button onclick="removeFavorite('${item.id}')" class="add-favorite-btn">Remove</button>
+            <img src="${item.thumbnail}" alt="${item.title}">
+            <div class="content">
+                <a href="${item.url}" target="_blank">${item.title}</a>
+                <div class="date">${item.date}</div>
+            </div>
+            <button class="add-favorite-btn" data-id="${item.id}">Remove</button>
         </li>
     `).join('');
+    favoritesList.addEventListener('click', handleFavoriteClick);
 }
 
-function addFavorite(id, title, url) {
+function handleFavoriteClick(event) {
+    if (event.target.classList.contains('add-favorite-btn')) {
+        const id = event.target.getAttribute('data-id');
+        removeFavorite(id);
+    }
+}
+
+function addFavorite(id, title, url, thumbnail, date) {
     if (!currentUser) {
         alert('Please log in to add favorites.');
         return;
     }
     const favorites = JSON.parse(localStorage.getItem(`favorites_${currentUser}`)) || [];
     if (!favorites.some(item => item.id === id)) {
-        favorites.push({ id, title, url });
+        favorites.push({ id, title, url, thumbnail, date });
         localStorage.setItem(`favorites_${currentUser}`, JSON.stringify(favorites));
         loadFavorites();
     }
@@ -111,15 +123,33 @@ function displayResults(youtubeResults, redditResults) {
 
     youtubeList.innerHTML = youtubeResults.map(video => `
         <li>
-            <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">${video.snippet.title}</a>
-            <button onclick="addFavorite('yt_${video.id.videoId}', '${video.snippet.title}', 'https://www.youtube.com/watch?v=${video.id.videoId}')" class="add-favorite-btn">Add to Favorites</button>
+            <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}">
+            <div class="content">
+                <a href="https://www.youtube.com/watch?v=${video.id.videoId}" target="_blank">${video.snippet.title}</a>
+                <div class="date">${new Date(video.snippet.publishedAt).toLocaleDateString()}</div>
+            </div>
+            <button class="add-favorite-btn" data-id="yt_${video.id.videoId}" data-title="${video.snippet.title}" data-url="https://www.youtube.com/watch?v=${video.id.videoId}" data-thumbnail="${video.snippet.thumbnails.medium.url}" data-date="${new Date(video.snippet.publishedAt).toLocaleDateString()}">Add to Favorites</button>
         </li>
     `).join('');
 
     redditList.innerHTML = redditResults.map(thread => `
         <li>
-            <a href="https://www.reddit.com${thread.data.permalink}" target="_blank">${thread.data.title}</a>
-            <button onclick="addFavorite('rd_${thread.data.id}', '${thread.data.title}', 'https://www.reddit.com${thread.data.permalink}')" class="add-favorite-btn">Add to Favorites</button>
+            <img src="${thread.data.thumbnail && thread.data.thumbnail !== 'self' ? thread.data.thumbnail : 'https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-57x57.png'}" alt="${thread.data.title}">
+            <div class="content">
+                <a href="https://www.reddit.com${thread.data.permalink}" target="_blank">${thread.data.title}</a>
+                <div class="date">${new Date(thread.data.created_utc * 1000).toLocaleDateString()}</div>
+            </div>
+            <button class="add-favorite-btn" data-id="rd_${thread.data.id}" data-title="${thread.data.title}" data-url="https://www.reddit.com${thread.data.permalink}" data-thumbnail="${thread.data.thumbnail && thread.data.thumbnail !== 'self' ? thread.data.thumbnail : 'https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-57x57.png'}" data-date="${new Date(thread.data.created_utc * 1000).toLocaleDateString()}">Add to Favorites</button>
         </li>
     `).join('');
+
+    youtubeList.addEventListener('click', handleResultClick);
+    redditList.addEventListener('click', handleResultClick);
+}
+
+function handleResultClick(event) {
+    if (event.target.classList.contains('add-favorite-btn')) {
+        const { id, title, url, thumbnail, date } = event.target.dataset;
+        addFavorite(id, title, url, thumbnail, date);
+    }
 }

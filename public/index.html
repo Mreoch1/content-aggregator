@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ContentHub</title>
     <link rel="stylesheet" href="styles.css">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://www.reddit.com https://www.googleapis.com; script-src 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://www.reddit.com https://www.googleapis.com; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://i.ytimg.com https://b.thumbs.redditmedia.com">
 </head>
 <body>
     <div class="container">
@@ -25,20 +25,22 @@
                 </select>
                 <button id="searchButton" class="btn btn-primary">Search</button>
             </div>
-            <div id="resultsContainer">
-                <section id="youtubeResults">
-                    <h2>YouTube Videos</h2>
-                    <ul id="youtubeList" class="results-list"></ul>
-                </section>
-                <section id="redditResults">
-                    <h2>Reddit Threads</h2>
-                    <ul id="redditList" class="results-list"></ul>
+            <div id="contentContainer">
+                <div id="resultsContainer">
+                    <section id="youtubeResults">
+                        <h2>YouTube Videos</h2>
+                        <ul id="youtubeList" class="results-list"></ul>
+                    </section>
+                    <section id="redditResults">
+                        <h2>Reddit Threads</h2>
+                        <ul id="redditList" class="results-list"></ul>
+                    </section>
+                </div>
+                <section id="favoritesContainer">
+                    <h2>Favorites</h2>
+                    <ul id="favoritesList" class="results-list"></ul>
                 </section>
             </div>
-            <section id="favoritesContainer" style="display: none;">
-                <h2>Favorites</h2>
-                <ul id="favoritesList" class="results-list"></ul>
-            </section>
         </main>
     </div>
     <script src="app.js"></script>
