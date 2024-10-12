@@ -42,4 +42,4 @@ Blendr is a web application that allows users to search for and aggregate conten
 
 ## Live Demo
 
-You can view a live demo of the app here: https://blendr-app-2042e175ae6c.herokuapp.com/
+You can view a live demo of the app here: https://blendr.herokuapp.com
