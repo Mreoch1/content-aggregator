@@ -9,3 +9,6 @@
 [2024-10-12T00:30:00.000Z] Feature Addition: Implemented 'Enter' key functionality for search and login
 [2024-10-12T01:00:00.000Z] Layout Fix: Improved responsiveness and alignment of content across different zoom levels
 [2024-10-12T01:30:00.000Z] UI Enhancement: Improved display of Reddit threads and fixed alignment of "Add to Favorites" buttons
+[2024-10-12T02:00:00.000Z] Mobile UI Issue: Reddit text not visible on small screens
+[2024-10-12T02:00:00.000Z] JavaScript Error: "Object MouseEvent" displayed instead of username
+[2024-10-12T02:30:00.000Z] Fixed: Improved mobile responsiveness and corrected login event handling

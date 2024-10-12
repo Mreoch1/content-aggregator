@@ -183,6 +183,33 @@ input[type="text"], select {
         margin-top: 10px;
         width: 100%;
     }
+
+    #contentContainer {
+        flex-direction: column;
+    }
+
+    #resultsContainer, #youtubeResults, #redditResults, #favoritesContainer {
+        width: 100%;
+    }
+
+    .results-list li {
+        flex-direction: column;
+    }
+
+    .results-list img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+
+    .results-list .content {
+        width: 100%;
+    }
+
+    .add-favorite-btn {
+        width: 100%;
+        margin-top: 10px;
+    }
 }
 
 .youtube-item, .reddit-item {
@@ -312,3 +339,10 @@ input[type="text"], select {
 }
 
 /* Update any existing styles as needed */
+
+/* Ensure text is visible */
+.results-list a, .results-list .date {
+    color: #000;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 2px;
+}

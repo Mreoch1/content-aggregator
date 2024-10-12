@@ -32,9 +32,10 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleLoginPrompt();
 });
 
-function login(username) {
+function login(event) {
+    event.preventDefault(); // Prevent default form submission
     const usernameInput = document.getElementById('usernameInput');
-    username = username || usernameInput.value.trim();
+    const username = usernameInput.value.trim();
     if (username) {
         currentUser = username;
         localStorage.setItem('username', username);
