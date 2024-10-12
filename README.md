@@ -1,6 +1,6 @@
-# ContentHub
+# Blendr
 
-ContentHub is a web application that allows users to search for and aggregate content from YouTube and Reddit. Users can save their favorite content and manage their selections.
+Blendr is a web application that allows users to search for and aggregate content from YouTube and Reddit. Users can save their favorite content and manage their selections.
 
 ## Features
 
@@ -33,6 +33,7 @@ ContentHub is a web application that allows users to search for and aggregate co
 
 ## Recent Updates
 
+- Changed app name from ContentHub to Blendr
 - Implemented client-side Reddit API calls to avoid CORS issues
 - Updated Content Security Policy to allow necessary resources and inline styles
 - Added thumbnails and publication dates to search results
@@ -41,4 +42,4 @@ ContentHub is a web application that allows users to search for and aggregate co
 
 ## Live Demo
 
-You can view a live demo of the app here: https://contenthub-app-2042e175ae6c.herokuapp.com/
+You can view a live demo of the app here: https://blendr-app-2042e175ae6c.herokuapp.com/

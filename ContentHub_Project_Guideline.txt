@@ -1,4 +1,4 @@
-ContentHub Project Guidelines
+Blendr Project Guidelines
 
 1. Purpose:
    - Aggregate content from YouTube and Reddit based on user searches

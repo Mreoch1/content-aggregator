@@ -45,28 +45,6 @@ app.get('/api/youtube', async (req, res) => {
   }
 });
 
-app.get('/api/reddit', async (req, res) => {
-  try {
-    const { q, sort } = req.query;
-    console.log('Reddit request:', { q, sort });
-    const response = await axios.get(`https://www.reddit.com/search.json`, {
-      params: {
-        q,
-        sort: sort === 'date' ? 'new' : 'relevance',
-        limit: 10
-      },
-      headers: {
-        'User-Agent': 'ContentHub/1.0 (https://contenthub-app-2042e175ae6c.herokuapp.com/)'
-      }
-    });
-    console.log('Reddit response:', response.data);
-    res.json(response.data.data.children);
-  } catch (error) {
-    logError('Reddit', error.response ? JSON.stringify(error.response.data) : error.message);
-    res.status(500).json({ error: 'Error fetching Reddit data', details: 'Unable to fetch data from Reddit' });
-  }
-});
-
 // For any other route, serve the index.html file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
