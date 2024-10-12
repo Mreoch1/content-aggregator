@@ -10,6 +10,7 @@ Blendr is a web application that allows users to search for and aggregate conten
 - Save favorite content items
 - User authentication (login/logout functionality)
 - Responsive design for various screen sizes
+- Consistent layout across different zoom levels
 
 ## Technical Details
 
@@ -17,6 +18,14 @@ Blendr is a web application that allows users to search for and aggregate conten
 - Backend: Node.js with Express.js
 - APIs: YouTube Data API, Reddit JSON API
 - Deployment: Heroku
+
+## Recent Updates
+
+- Improved layout responsiveness and alignment
+- Added placeholder text in search box and result areas
+- Implemented 'Enter' key functionality for search and login
+- Enhanced display of Reddit threads
+- Fixed alignment issues with "Add to Favorites" buttons
 
 ## Setup and Deployment
 
@@ -31,17 +40,6 @@ Blendr is a web application that allows users to search for and aggregate conten
    - Set the `YOUTUBE_API_KEY` config var in Heroku
    - Push the code to Heroku
 
-## Recent Updates
-
-- Changed app name from ContentHub to Blendr
-- Implemented client-side Reddit API calls to avoid CORS issues
-- Updated Content Security Policy to allow necessary resources and inline styles
-- Added thumbnails and publication dates to search results
-- Redesigned layout for better user experience
-- Fixed various bugs related to event handling and favorites management
-
 ## Live Demo
 
 You can view a live demo of the app here: https://blendr-4c514d99c8e5.herokuapp.com/
-
-Note: The alphanumeric string in the URL is a unique identifier assigned by Heroku.
