@@ -12,3 +12,5 @@
 [2024-10-12T02:00:00.000Z] Mobile UI Issue: Reddit text not visible on small screens
 [2024-10-12T02:00:00.000Z] JavaScript Error: "Object MouseEvent" displayed instead of username
 [2024-10-12T02:30:00.000Z] Fixed: Improved mobile responsiveness and corrected login event handling
+[2024-10-12T03:00:00.000Z] Mobile Issue: Login feature not working on mobile devices
+[2024-10-12T03:30:00.000Z] Fixed: Updated event listeners to handle both click and touch events for login/logout functionality
