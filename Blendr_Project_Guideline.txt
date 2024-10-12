@@ -12,6 +12,7 @@ Blendr Project Guidelines
    - Save and manage favorite content
    - Responsive design for various screen sizes
    - Consistent layout across different zoom levels
+   - Mobile-friendly interface
 
 3. Technical Requirements:
    - Frontend: HTML, CSS, and vanilla JavaScript (no frameworks)
@@ -31,6 +32,7 @@ Blendr Project Guidelines
    - Enter key support for search and login actions
    - Placeholder text in search box and result areas
    - Login prompt for saving favorites
+   - Touch-friendly interactions for mobile devices
 
 6. Performance:
    - Optimize API calls to minimize load times

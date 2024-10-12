@@ -11,6 +11,7 @@ Blendr is a web application that allows users to search for and aggregate conten
 - User authentication (login/logout functionality)
 - Responsive design for various screen sizes
 - Consistent layout across different zoom levels
+- Mobile-friendly interface
 
 ## Technical Details
 
@@ -26,6 +27,8 @@ Blendr is a web application that allows users to search for and aggregate conten
 - Implemented 'Enter' key functionality for search and login
 - Enhanced display of Reddit threads
 - Fixed alignment issues with "Add to Favorites" buttons
+- Improved mobile responsiveness
+- Fixed login functionality for mobile devices
 
 ## Setup and Deployment
 
@@ -43,3 +46,7 @@ Blendr is a web application that allows users to search for and aggregate conten
 ## Live Demo
 
 You can view a live demo of the app here: https://blendr-4c514d99c8e5.herokuapp.com/
+
+## Version
+
+Current version: 1.0.1
