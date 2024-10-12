@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedUsername) {
         login(savedUsername);
     }
+    toggleLoginPrompt();
 });
 
 function login() {
@@ -24,6 +25,7 @@ function login() {
         document.getElementById('favoritesContainer').style.display = 'block';
         document.getElementById('logoutButton').addEventListener('click', logout);
         loadFavorites();
+        toggleLoginPrompt();
     }
 }
 
@@ -36,6 +38,8 @@ function logout() {
     `;
     document.getElementById('favoritesContainer').style.display = 'none';
     document.getElementById('loginButton').addEventListener('click', login);
+    document.getElementById('favoritesList').innerHTML = '<li class="placeholder">Your favorite content will appear here after you log in and add items.</li>';
+    toggleLoginPrompt();
 }
 
 function loadFavorites() {
@@ -121,7 +125,7 @@ function displayResults(youtubeResults, redditResults) {
     const youtubeList = document.getElementById('youtubeList');
     const redditList = document.getElementById('redditList');
 
-    youtubeList.innerHTML = youtubeResults.map(video => `
+    youtubeList.innerHTML = youtubeResults.length ? youtubeResults.map(video => `
         <li>
             <img src="${video.snippet.thumbnails.medium.url}" alt="${video.snippet.title}">
             <div class="content">
@@ -130,9 +134,9 @@ function displayResults(youtubeResults, redditResults) {
             </div>
             <button class="add-favorite-btn" data-id="yt_${video.id.videoId}" data-title="${video.snippet.title}" data-url="https://www.youtube.com/watch?v=${video.id.videoId}" data-thumbnail="${video.snippet.thumbnails.medium.url}" data-date="${new Date(video.snippet.publishedAt).toLocaleDateString()}">Add to Favorites</button>
         </li>
-    `).join('');
+    `).join('') : '<li class="placeholder">No YouTube videos found for this search.</li>';
 
-    redditList.innerHTML = redditResults.map(thread => `
+    redditList.innerHTML = redditResults.length ? redditResults.map(thread => `
         <li>
             <img src="${thread.data.thumbnail && thread.data.thumbnail !== 'self' ? thread.data.thumbnail : 'https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-57x57.png'}" alt="${thread.data.title}">
             <div class="content">
@@ -141,7 +145,7 @@ function displayResults(youtubeResults, redditResults) {
             </div>
             <button class="add-favorite-btn" data-id="rd_${thread.data.id}" data-title="${thread.data.title}" data-url="https://www.reddit.com${thread.data.permalink}" data-thumbnail="${thread.data.thumbnail && thread.data.thumbnail !== 'self' ? thread.data.thumbnail : 'https://www.redditstatic.com/desktop2x/img/favicon/apple-icon-57x57.png'}" data-date="${new Date(thread.data.created_utc * 1000).toLocaleDateString()}">Add to Favorites</button>
         </li>
-    `).join('');
+    `).join('') : '<li class="placeholder">No Reddit threads found for this search.</li>';
 
     youtubeList.addEventListener('click', handleResultClick);
     redditList.addEventListener('click', handleResultClick);
@@ -152,4 +156,9 @@ function handleResultClick(event) {
         const { id, title, url, thumbnail, date } = event.target.dataset;
         addFavorite(id, title, url, thumbnail, date);
     }
+}
+
+function toggleLoginPrompt() {
+    const loginPrompt = document.getElementById('loginPrompt');
+    loginPrompt.style.display = currentUser ? 'none' : 'block';
 }

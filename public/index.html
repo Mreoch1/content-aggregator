@@ -18,27 +18,34 @@
         </header>
         <main>
             <div id="searchContainer">
-                <input type="text" id="searchInput" placeholder="Search...">
+                <input type="text" id="searchInput" placeholder="Search for videos or threads (e.g., 'cute cats', 'cooking tips')">
                 <select id="sortSelect">
                     <option value="relevance">Relevance</option>
                     <option value="date">Date</option>
                 </select>
                 <button id="searchButton" class="btn btn-primary">Search</button>
             </div>
+            <p id="loginPrompt" class="login-prompt">Log in to save your favorite content!</p>
             <div id="contentContainer">
                 <div id="resultsContainer">
                     <section id="youtubeResults">
                         <h2>YouTube Videos</h2>
-                        <ul id="youtubeList" class="results-list"></ul>
+                        <ul id="youtubeList" class="results-list">
+                            <li class="placeholder">YouTube videos will appear here after you search.</li>
+                        </ul>
                     </section>
                     <section id="redditResults">
                         <h2>Reddit Threads</h2>
-                        <ul id="redditList" class="results-list"></ul>
+                        <ul id="redditList" class="results-list">
+                            <li class="placeholder">Reddit threads will appear here after you search.</li>
+                        </ul>
                     </section>
                 </div>
                 <section id="favoritesContainer">
                     <h2>Favorites</h2>
-                    <ul id="favoritesList" class="results-list"></ul>
+                    <ul id="favoritesList" class="results-list">
+                        <li class="placeholder">Your favorite content will appear here after you log in and add items.</li>
+                    </ul>
                 </section>
             </div>
         </main>

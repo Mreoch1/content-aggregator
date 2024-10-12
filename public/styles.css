@@ -250,3 +250,21 @@ input[type="text"], select {
 .hidden {
     display: none;
 }
+
+/* Add these new styles */
+.login-prompt {
+    text-align: center;
+    color: #666;
+    margin: 10px 0;
+}
+
+.placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+#searchInput {
+    width: 60%;
+}
+
+/* Update any existing styles as needed */
