@@ -2,3 +2,6 @@
 [2024-10-11T22:00:00.000Z] JavaScript Error: performSearch is not defined
 [2024-10-11T22:00:00.000Z] Fixed: Removed references to non-existent elements and defined performSearch function
 [2024-10-11T22:30:00.000Z] Solution: Moved Reddit API call to client-side to bypass CORS issues. Updated Content Security Policy to allow connections to Reddit API.
+[2024-10-11T23:00:00.000Z] CSP Error: Refused to apply inline style because it violates Content Security Policy directive
+[2024-10-11T23:00:00.000Z] CSP Error: Refused to execute inline event handler because it violates Content Security Policy directive
+[2024-10-11T23:30:00.000Z] Fixed: Updated Content Security Policy to allow necessary inline styles and scripts. Added 'unsafe-inline' for style-src and updated img-src to allow YouTube and Reddit thumbnails.

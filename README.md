@@ -1,79 +1,43 @@
 # ContentHub
 
-ContentHub is a web-based content aggregator that pulls videos from YouTube and threads from Reddit based on user search queries.
+ContentHub is a web application that allows users to search for and aggregate content from YouTube and Reddit. Users can save their favorite content and manage their selections.
 
 ## Features
 
-- Search for YouTube videos and Reddit threads simultaneously
-- Display results side by side with publication dates
+- Search YouTube videos and Reddit threads simultaneously
 - Sort results by relevance or date
-- Simple user authentication with persistent sessions
-- Save favorite videos and threads
-- Responsive design for both desktop and mobile use
+- View thumbnails and publication dates for both YouTube videos and Reddit threads
+- Save favorite content items
+- User authentication (login/logout functionality)
+- Responsive design for various screen sizes
 
-## Technology Stack
+## Technical Details
 
-- Backend: Node.js with Express
-- Frontend: HTML, CSS (Tailwind CSS), and Vanilla JavaScript
-- APIs: 
-  - YouTube Data API v3 (for video search)
-  - Reddit JSON endpoint (for thread search)
-- Local Storage for user preferences and favorites
+- Frontend: HTML, CSS, and vanilla JavaScript
+- Backend: Node.js with Express.js
+- APIs: YouTube Data API, Reddit JSON API
+- Deployment: Heroku
 
-## Setup
+## Setup and Deployment
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/Mreoch1/content-aggregator.git
-   cd content-aggregator
-   ```
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Set up environment variables in a `.env` file:
+   - `PORT`: The port number for the server (default: 3000)
+   - `YOUTUBE_API_KEY`: Your YouTube Data API key
+4. Run locally: `npm start`
+5. Deploy to Heroku:
+   - Create a new Heroku app
+   - Set the `YOUTUBE_API_KEY` config var in Heroku
+   - Push the code to Heroku
 
-2. Install dependencies:
-   ```
-   npm install
-   ```
+## Recent Updates
 
-3. Create a `.env` file in the root directory and add your YouTube API key:
-   ```
-   YOUTUBE_API_KEY=your_youtube_api_key_here
-   ```
-
-4. Start the server:
-   ```
-   npm start
-   ```
-
-5. For development with auto-restart on file changes:
-   ```
-   npm run dev
-   ```
-
-6. Open a web browser and navigate to `http://localhost:3000`
-
-## Usage
-
-1. Enter a username to log in
-2. Enter a search query in the input field
-3. Select sorting preference (relevance or date)
-4. Click the "Search" button or press Enter
-5. View the results from YouTube and Reddit
-6. Click on video or thread links to view the original content
-7. Save items to favorites for quick access later
-
-## Project Structure
-
-- `server.js`: Main server file with API endpoints
-- `public/index.html`: Main HTML file
-- `public/styles.css`: CSS styles (including Tailwind CSS)
-- `public/app.js`: Frontend JavaScript
-
-## Contributing
-
-Please read the `best_practices.txt` file for our coding standards and best practices.
-
-## License
-
-This project is open source and available under the MIT License.
+- Implemented client-side Reddit API calls to avoid CORS issues
+- Updated Content Security Policy to allow necessary resources and inline styles
+- Added thumbnails and publication dates to search results
+- Redesigned layout for better user experience
+- Fixed various bugs related to event handling and favorites management
 
 ## Live Demo
 
