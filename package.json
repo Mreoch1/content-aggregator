@@ -1,15 +1,14 @@
 {
   "name": "blendr",
   "version": "1.0.1",
-  "description": "A content aggregator for YouTube videos and Reddit threads",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.17.1",
-    "axios": "^0.21.1",
-    "dotenv": "^10.0.0"
+    "axios": "^1.7.7",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1"
   },
   "engines": {
     "node": "14.x"
