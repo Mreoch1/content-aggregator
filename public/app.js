@@ -3,9 +3,26 @@ let currentUser = null;
 document.addEventListener('DOMContentLoaded', () => {
     const searchButton = document.getElementById('searchButton');
     const loginButton = document.getElementById('loginButton');
+    const searchInput = document.getElementById('searchInput');
+    const usernameInput = document.getElementById('usernameInput');
 
     searchButton.addEventListener('click', performSearch);
     loginButton.addEventListener('click', login);
+
+    // Add event listeners for 'Enter' key
+    searchInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            performSearch();
+        }
+    });
+
+    usernameInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            login();
+        }
+    });
 
     // Check if user is already logged in
     const savedUsername = localStorage.getItem('username');
@@ -15,9 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
     toggleLoginPrompt();
 });
 
-function login() {
+function login(username) {
     const usernameInput = document.getElementById('usernameInput');
-    const username = usernameInput.value.trim();
+    username = username || usernameInput.value.trim();
     if (username) {
         currentUser = username;
         localStorage.setItem('username', username);
@@ -32,7 +49,8 @@ function login() {
 function logout() {
     currentUser = null;
     localStorage.removeItem('username');
-    document.getElementById('loginContainer').innerHTML = `
+    const loginContainer = document.getElementById('loginContainer');
+    loginContainer.innerHTML = `
         <input type="text" id="usernameInput" placeholder="Username">
         <button id="loginButton" class="btn btn-primary">Login</button>
     `;
@@ -40,6 +58,15 @@ function logout() {
     document.getElementById('loginButton').addEventListener('click', login);
     document.getElementById('favoritesList').innerHTML = '<li class="placeholder">Your favorite content will appear here after you log in and add items.</li>';
     toggleLoginPrompt();
+
+    // Add event listener for 'Enter' key on the new username input
+    const newUsernameInput = document.getElementById('usernameInput');
+    newUsernameInput.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            login();
+        }
+    });
 }
 
 function loadFavorites() {
