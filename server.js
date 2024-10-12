@@ -1,13 +1,21 @@
+console.log('Starting server.js');
 const express = require('express');
+console.log('Express loaded');
 const path = require('path');
+console.log('Path loaded');
 const dotenv = require('dotenv');
+console.log('Dotenv loaded');
 const axios = require('axios');
+console.log('Axios loaded');
 
 // Load environment variables
 dotenv.config();
+console.log('Dotenv config applied');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+console.log('Express app created');
 
 app.use(express.static('public'));
 app.use(express.json());
