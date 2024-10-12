@@ -67,27 +67,33 @@ input[type="text"], select {
 
 #contentContainer {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+    gap: 20px;
 }
 
 #resultsContainer {
-    flex: 2;
+    flex: 1 1 65%;
     display: flex;
-    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
 }
 
-#youtubeResults, #redditResults {
-    width: 48%;
+#youtubeResults,
+#redditResults {
+    flex: 1 1 45%;
+    min-width: 300px;
 }
 
 #favoritesContainer {
-    flex: 1;
-    margin-left: 20px;
+    flex: 1 1 30%;
+    min-width: 300px;
 }
 
 .results-list {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 .results-list li {
@@ -97,6 +103,7 @@ input[type="text"], select {
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
 }
 
@@ -105,20 +112,22 @@ input[type="text"], select {
     height: 90px;
     object-fit: cover;
     margin-right: 10px;
+    flex: 0 0 auto;
 }
 
 .results-list .content {
-    flex: 1;
+    flex: 1 1 auto;
+    min-width: 0;
 }
 
 .results-list a {
     color: #35424a;
     text-decoration: none;
     font-weight: bold;
-}
-
-.results-list a:hover {
-    color: #e8491d;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .results-list .date {
@@ -132,13 +141,26 @@ input[type="text"], select {
     color: #ffffff;
     border: none;
     padding: 5px 10px;
-    margin-left: 10px;
+    margin-top: 5px;
     cursor: pointer;
     border-radius: 3px;
+    flex: 0 0 auto;
 }
 
 .add-favorite-btn:hover {
     background: #4a5f6b;
+}
+
+@media (max-width: 768px) {
+    #resultsContainer {
+        flex-direction: column;
+    }
+
+    #youtubeResults,
+    #redditResults,
+    #favoritesContainer {
+        flex: 1 1 100%;
+    }
 }
 
 .youtube-item, .reddit-item {
