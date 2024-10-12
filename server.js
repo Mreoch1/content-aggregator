@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const dotenv = require('dotenv');
 const axios = require('axios');
-const fs = require('fs');
 
 // Load environment variables
 dotenv.config();
@@ -52,5 +51,4 @@ app.get('*', (req, res) => {
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
-  console.log('Environment variables:', process.env);
 });
