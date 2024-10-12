@@ -1,5 +1,5 @@
 {
-  "name": "contenthub",
+  "name": "blendr",
   "version": "1.0.0",
   "description": "A content aggregator for YouTube videos and Reddit threads",
   "main": "server.js",
