@@ -54,17 +54,25 @@ Blendr Project Guidelines
    - Consider user feedback for future enhancements
 
 10. Deployment and Troubleshooting:
-   - Use Heroku for deployment
-   - The app will use Heroku-24 stack on the next deployment
-   - Ensure Node.js version in package.json is set to a current LTS version (e.g., "18.x")
-   - If deployment fails:
-     a. Delete node_modules and package-lock.json
-     b. Clear npm cache
-     c. Reinstall dependencies
-     d. Commit changes and redeploy
-   - Keep track of deployment issues and resolutions in error_log.txt
+    - Use Heroku for deployment
+    - The app will use Heroku-24 stack on the next deployment
+    - Ensure Node.js version in package.json is set to a current LTS version (e.g., "18.x")
+    - If deployment fails:
+      a. Delete node_modules and package-lock.json
+      b. Clear npm cache
+      c. Reinstall dependencies
+      d. Commit changes and redeploy
+    - Keep track of deployment issues and resolutions in error_log.txt
 
 Deployment:
 - The app is deployed on Heroku
 - The app URL includes a unique identifier assigned by Heroku: https://blendr-4c514d99c8e5.herokuapp.com/
 - This identifier ensures a unique URL for the app and cannot be removed
+
+Git Configuration:
+- Email: mreoch82@hotmail.com
+- Username: Mreoch1
+
+To set up Git configuration:
+git config --global user.email "mreoch82@hotmail.com"
+git config --global user.name "Mreoch1"

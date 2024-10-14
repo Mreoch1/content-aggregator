@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
         login(savedUsername);
     }
     toggleLoginPrompt();
+
+    // Add this at the end of the DOMContentLoaded event listener
+    document.getElementById('sortSelect').addEventListener('change', sortAndDisplayResults);
 });
 
 function login(event) {
@@ -117,16 +120,16 @@ function removeFavorite(id) {
     loadFavorites();
 }
 
-async function fetchYouTubeVideos(query, sort) {
-    const response = await fetch(`/api/youtube?q=${encodeURIComponent(query)}&sort=${sort}`);
+async function fetchYouTubeVideos(query) {
+    const response = await fetch(`/api/youtube?q=${encodeURIComponent(query)}`);
     if (!response.ok) {
         throw new Error(`Failed to fetch YouTube videos: ${response.statusText}`);
     }
     return await response.json();
 }
 
-async function fetchRedditThreads(query, sort) {
-    const response = await fetch(`https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&sort=${sort === 'date' ? 'new' : 'relevance'}&limit=10`);
+async function fetchRedditThreads(query) {
+    const response = await fetch(`https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&limit=10`);
     if (!response.ok) {
         throw new Error(`Failed to fetch Reddit threads: ${response.statusText}`);
     }
@@ -135,21 +138,59 @@ async function fetchRedditThreads(query, sort) {
 }
 
 async function performSearch() {
-    const query = document.getElementById('searchInput').value;
-    const sort = document.getElementById('sortSelect').value;
+    const query = document.getElementById('searchInput').value.trim();
+    
+    if (!query) {
+        // Easter egg: Show Rick Astley's "Never Gonna Give You Up" video
+        const rickRollVideo = {
+            id: { videoId: 'dQw4w9WgXcQ' },
+            snippet: {
+                title: 'Rick Astley - Never Gonna Give You Up (Official Music Video)',
+                thumbnails: { medium: { url: 'https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg' } },
+                publishedAt: '2009-10-25T06:57:33Z'
+            }
+        };
+        window.currentResults = { youtube: [rickRollVideo], reddit: [] };
+        displayResults([rickRollVideo], []);
+        return;
+    }
     
     try {
         const [youtubeResults, redditResults] = await Promise.all([
-            fetchYouTubeVideos(query, sort),
-            fetchRedditThreads(query, sort)
+            fetchYouTubeVideos(query),
+            fetchRedditThreads(query)
         ]);
 
+        window.currentResults = { youtube: youtubeResults, reddit: redditResults };
         displayResults(youtubeResults, redditResults);
     } catch (error) {
         console.error('Error performing search:', error);
         document.getElementById('youtubeList').innerHTML = '<li>Error fetching YouTube results</li>';
         document.getElementById('redditList').innerHTML = '<li>Error fetching Reddit results</li>';
     }
+}
+
+function sortAndDisplayResults() {
+    if (!window.currentResults) return;
+
+    const sort = document.getElementById('sortSelect').value;
+    const sortedYoutubeResults = sortResults(window.currentResults.youtube, sort);
+    const sortedRedditResults = sortResults(window.currentResults.reddit, sort);
+
+    displayResults(sortedYoutubeResults, sortedRedditResults);
+}
+
+function sortResults(results, sortType) {
+    return [...results].sort((a, b) => {
+        if (sortType === 'date') {
+            const dateA = new Date(a.snippet ? a.snippet.publishedAt : a.data.created_utc * 1000);
+            const dateB = new Date(b.snippet ? b.snippet.publishedAt : b.data.created_utc * 1000);
+            return dateB - dateA; // Sort by date descending
+        } else {
+            // For relevance, we'll use the order returned by the API
+            return 0;
+        }
+    });
 }
 
 function displayResults(youtubeResults, redditResults) {

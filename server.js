@@ -13,35 +13,28 @@ dotenv.config();
 console.log('Dotenv config applied');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 console.log('Express app created');
 
 app.use(express.static('public'));
-app.use(express.json());
 
-// Function to log errors
-function logError(source, error) {
-  const timestamp = new Date().toISOString();
-  const errorMessage = `[${timestamp}] ${source} Error: ${error}\n`;
-  fs.appendFile('error_log.txt', errorMessage, (err) => {
-    if (err) console.error('Error writing to log file:', err);
-  });
-  console.error(errorMessage);
-}
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.get('/api/youtube', async (req, res) => {
   try {
-    const { q, sort } = req.query;
-    console.log('YouTube API request:', { q, sort });
+    const { q } = req.query;
+    console.log('YouTube API request:', { q });
     const response = await axios.get('https://www.googleapis.com/youtube/v3/search', {
       params: {
         part: 'snippet',
         q,
         type: 'video',
         key: process.env.YOUTUBE_API_KEY,
-        order: sort === 'date' ? 'date' : 'relevance',
-        maxResults: 10
+        order: 'relevance', // Default to relevance
+        maxResults: 20 // Increase to 20 to have more results for sorting
       }
     });
     console.log('YouTube API response:', response.data);
@@ -57,6 +50,11 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// Add this route for testing
+app.get('/test', (req, res) => {
+  res.send('Server is running!');
+});
+
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
